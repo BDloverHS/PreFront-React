@@ -10,8 +10,8 @@ import colors from '../../styles/colors'
 import sizes from '../../styles/sizes'
 import logo from '../../assets/images/logo.png'
 
-const { primary, light } = colors
-const { small, normal, medium, big } = sizes
+const { primary, light, dark, white } = colors
+const { medium, big } = sizes
 
 const StyledHeader = styled.header`
   .site-top {
@@ -42,11 +42,57 @@ const StyledHeader = styled.header`
     .layout-width {
       display: flex;
       justify-content: space-between;
+      height: 150px;
+      align-items: center;
     }
   }
 `
-const StyledForm = styled.form``
-const StyledMenu = styled.menu``
+const StyledForm = styled.form`
+  width: 350px;
+  display: flex;
+  border: 5px solid ${dark};
+
+  button {
+    width: 45px;
+    background: ${dark};
+    color: ${white};
+    border: 0;
+    cursor: pointer;
+
+    svg {
+      font-size: ${big};
+    }
+  }
+
+  input {
+    flex-grow: 1;
+    border: 0;
+    padding: 10px;
+    font-size: ${medium};
+  }
+`
+
+const StyledMenu = styled.nav`
+background ${primary};
+
+  .layout-width {
+    display: flex;
+    height: 50px;
+    align-items: center;
+
+    a {
+      color: ${light};
+      font-size: ${medium}
+      padding: 0 40px;
+      line-height: 50px;
+
+      &:hover,
+      &.on {
+        background: ${dark}
+      }
+    }
+  }
+`
 
 const Header = () => {
   return (
@@ -71,24 +117,16 @@ const Header = () => {
       {/* site-top */}
       <div className="logo-search">
         <div className="layout-width">
-          <div className="left">
-            <Link href="/">
-              <Image src={logo} alt="로고" />
-            </Link>
-          </div>
+          <Link href="/" className="logo">
+            <Image src={logo} alt="로고" />
+          </Link>
 
-          <div className="right">
-            <StyledForm method="GET" action="/board/search" autoComplete="off">
-              <input
-                type="text"
-                name="skey"
-                placeholder="검색어를 입력하세요."
-              />
-              <button type="submit">
-                <FaSearch />
-              </button>
-            </StyledForm>
-          </div>
+          <StyledForm method="GET" action="/board/search" autoComplete="off">
+            <input type="text" name="skey" placeholder="검색어를 입력하세요." />
+            <button type="submit">
+              <FaSearch />
+            </button>
+          </StyledForm>
         </div>
       </div>
       {/* logo-search */}

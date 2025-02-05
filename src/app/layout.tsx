@@ -1,15 +1,22 @@
-import StyledJsxRegistry from "./registry";
+import StyledComponentsRegistry from './registry'
+import Header from './global/ui/outlines/Header'
+import Footer from './global/ui/outlines/Footer'
+import './globals.css'
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body>
-        <StyledJsxRegistry>{children}</StyledJsxRegistry>
+        <StyledComponentsRegistry>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </StyledComponentsRegistry>
       </body>
     </html>
-  );
+  )
 }

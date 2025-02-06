@@ -1,11 +1,14 @@
 'use client'
 
 import React, { useState, useCallback, useActionState } from 'react'
+// import { useSearchParams } from 'next/navigation'
 import JoinForm from '../components/JoinForm'
 import { processJoin } from '../../services/actions'
+import { useSearchParams } from 'next/navigation'
 
 const JoinContainer = () => {
-  const actionState = useActionState(processJoin)
+  const searchParams = useSearchParams()
+  const actionState = useActionState(processJoin, searchParams)
   const [form, setForm] = useState({})
 
   const onChange = useCallback((e) => {

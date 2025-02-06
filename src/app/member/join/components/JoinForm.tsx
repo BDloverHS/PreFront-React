@@ -8,11 +8,14 @@ import {
 } from 'react-icons/md'
 
 import { Input } from '@/app/global/components/FormConponents'
+import { SmallButton, BigButton } from '@/app/global/components/Buttons'
 import DatePicker from 'react-datepicker'
 
 const StyledForm = styled.form``
 
 const JoinForm = ({ form, onClick, onChange, onSelectDate }) => {
+  const [errors, formAction, isPending] = actionState
+
   return (
     <>
       <StyledForm autoComplete="off">
@@ -85,7 +88,7 @@ const JoinForm = ({ form, onClick, onChange, onSelectDate }) => {
             value={form?.zipCode ?? ''}
             onChange={onChange}
           />
-          <button type="button">주소찾기</button>
+          <SmallButton type="button">주소찾기</SmallButton>
         </div>
 
         <Input
@@ -186,6 +189,9 @@ const JoinForm = ({ form, onClick, onChange, onSelectDate }) => {
             광고성 정보 전송에 동의합니다.(선택)
           </div>
         </div>
+        <BigButton type="submit" className="submit-btn" disabled={inPending}>
+          가입하기
+        </BigButton>
       </StyledForm>
     </>
   )

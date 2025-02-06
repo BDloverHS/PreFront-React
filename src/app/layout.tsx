@@ -3,9 +3,13 @@ import Header from './global/ui/outlines/Header'
 import Footer from './global/ui/outlines/Footer'
 import { CommonProvider } from './global/contexts/CommonContext'
 import { Metadata } from 'next'
+import { setDefaultLocale } from 'react-datepicker'
+import { ko } from 'date-fns/locale'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './globals.css'
+
+setDefaultLocale(ko)
 
 export const metadata: Metadata = {
   title: '핀테크 과정 포트폴리오',

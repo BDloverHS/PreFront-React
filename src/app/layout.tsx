@@ -4,6 +4,7 @@ import Footer from './global/ui/outlines/Footer'
 import { CommonProvider } from './global/contexts/CommonContext'
 import { Metadata } from 'next'
 
+import 'react-datepicker/dist/react-datepicker.css'
 import './globals.css'
 
 export const metadata: Metadata = {

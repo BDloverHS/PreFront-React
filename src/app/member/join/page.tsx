@@ -1,11 +1,14 @@
 import JoinContainer from './containers/JoinCotainer'
 import { MainTitle } from '@/app/global/components/StyledTitle'
+import { MainContentBox } from '@/app/global/components/ContentBox'
 
 const JoinPage = () => {
   return (
     <>
-      <MainTitle>회원가입</MainTitle>
-      <JoinContainer />
+      <MainContentBox maxWidth={750} minWidth={650}>
+        <MainTitle>회원가입</MainTitle>
+        <JoinContainer />
+      </MainContentBox>
     </>
   )
 }

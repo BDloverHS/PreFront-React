@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,7 +9,7 @@ import colors from '../../styles/colors'
 import sizes from '../../styles/sizes'
 import logo from '../../assets/images/logo.png'
 
-const { primary, light, dark, white } = colors
+const { white, primary, light, dark } = colors
 const { medium, big } = sizes
 
 const StyledHeader = styled.header`
@@ -73,22 +72,21 @@ const StyledForm = styled.form`
 `
 
 const StyledMenu = styled.nav`
-background ${primary};
+  background: ${primary};
 
   .layout-width {
     display: flex;
     height: 50px;
-    align-items: center;
 
     a {
       color: ${light};
-      font-size: ${medium}
+      font-size: ${medium};
       padding: 0 40px;
       line-height: 50px;
 
       &:hover,
       &.on {
-        background: ${dark}
+        background: ${dark};
       }
     }
   }
@@ -105,12 +103,12 @@ const Header = () => {
             </Link>
           </div>
           <div className="right">
-            <Link href="/member/join">
+            <a href="/member/join">
               <FaUserPlus /> 회원가입
-            </Link>
-            <Link href="/member/login">
+            </a>
+            <a href="/member/login">
               <SlLogin /> 로그인
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -118,11 +116,11 @@ const Header = () => {
       <div className="logo-search">
         <div className="layout-width">
           <Link href="/" className="logo">
-            <Image src={logo} alt="로고" />
+            <Image src={logo} alt="로고" priority={true} />
           </Link>
 
           <StyledForm method="GET" action="/board/search" autoComplete="off">
-            <input type="text" name="skey" placeholder="검색어를 입력하세요." />
+            <input type="text" name="skey" placeholder="검색어를 입력하세요" />
             <button type="submit">
               <FaSearch />
             </button>
@@ -131,7 +129,11 @@ const Header = () => {
       </div>
       {/* logo-search */}
       <StyledMenu>
-        <div className="layout-width"></div>
+        <div className="layout-width">
+          <a href="#">메뉴1</a>
+          <a href="#">메뉴2</a>
+          <a href="#">메뉴3</a>
+        </div>
       </StyledMenu>
     </StyledHeader>
   )

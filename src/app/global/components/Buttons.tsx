@@ -29,7 +29,6 @@ export const ExtraButton = styled.button`
 export const ButtonGroup = styled.div`
   display: flex;
   width: 100%;
-
   ${({ width }) =>
     width &&
     css`

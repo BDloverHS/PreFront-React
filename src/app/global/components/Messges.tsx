@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import colors from '../styles/colors'
 import sizes from '../styles/sizes'
@@ -37,4 +38,4 @@ const Messages = ({ children, color }) => {
   ))
 }
 
-export default Messages
+export default React.memo(Messages)

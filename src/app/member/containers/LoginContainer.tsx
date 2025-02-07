@@ -4,9 +4,13 @@ import { useSearchParams } from 'next/navigation'
 import LoginForm from '../components/LoginForm'
 import { processLogin } from '../services/actions'
 
-const LoginContainer = () => {
+type Props = {
+  redirectUrl?: string
+}
+
+const LoginContainer = ({ redirectUrl }: Props) => {
   const searchParams = useSearchParams()
-  const params = { redirectUrl: searchParams.get('redirectUrl') }
+  const params = { redirectUrl: redirectUrl ?? searchParams.get('redirectUrl') }
   const actionState = useActionState(processLogin, params)
   const [form, setForm] = useState<{ email?: string; password?: string }>({})
 

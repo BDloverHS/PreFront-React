@@ -178,11 +178,16 @@ export const processLogin = async (params, formData: FormData) => {
  *
  */
 export const getUserInfo = async () => {
+  const cookie = await cookies()
+  if (!cookie.has('token')) return
+
   try {
     const res = await apiRequest('/member/login')
     if (res.status === 200) {
       const result = await res.json()
       return result.success && result.data
+    } else {
+      cookie.delete('token')
     }
   } catch (err) {}
 }

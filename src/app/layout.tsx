@@ -4,7 +4,7 @@ import Footer from './global/ui/outlines/Footer'
 import { CommonProvider } from './global/contexts/CommonContext'
 import { Metadata } from 'next'
 import { getUserInfo } from './member/services/actions'
-
+import { UserProvider } from './global/contexts/UserContext'
 import 'react-datepicker/dist/react-datepicker.css'
 import './globals.css'
 
@@ -24,11 +24,13 @@ export default async function RootLayout({
     <html lang="ko">
       <body>
         <StyledComponentsRegistry>
-          <CommonProvider>
-            <Header />
-            <main className="main-content">{children}</main>
-            <Footer />
-          </CommonProvider>
+          <UserProvider _userInfo={userInfo}>
+            <CommonProvider>
+              <Header />
+              <main className="main-content">{children}</main>
+              <Footer />
+            </CommonProvider>
+          </UserProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

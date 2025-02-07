@@ -8,6 +8,7 @@ import { FaUserPlus, FaHome, FaSearch } from 'react-icons/fa'
 import colors from '../../styles/colors'
 import sizes from '../../styles/sizes'
 import logo from '../../assets/images/logo.png'
+import useUser from '../../hook/useUser'
 
 const { white, primary, light, dark } = colors
 const { medium, big } = sizes
@@ -93,6 +94,9 @@ const StyledMenu = styled.nav`
 `
 
 const Header = () => {
+  const value = useUser()
+  console.log('value', value  )
+
   return (
     <StyledHeader>
       <div className="site-top">

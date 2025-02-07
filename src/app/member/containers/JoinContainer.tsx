@@ -2,14 +2,14 @@
 import React, { useState, useCallback, useActionState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import JoinForm from '../components/JoinForm'
-import { processJoin } from '../../services/actions'
+import { processJoin } from '../services/actions'
 
 const JoinContainer = () => {
   const searchParams = useSearchParams()
   const params = { redirectUrl: searchParams.get('redirectUrl') }
   const actionState = useActionState(processJoin, params)
   const [form, setForm] = useState({
-    gender: 'FEMALE' /* 기본값 설정 */,
+    gender: 'FEMALE',
   })
 
   const onChange = useCallback((e) => {

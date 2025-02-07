@@ -1,6 +1,9 @@
 'use server'
 import { redirect } from 'next/navigation'
 import { format } from 'date-fns'
+import { cookies } from 'next/headers'
+import apiRequest from '@/app/global/libs/apiRequest'
+
 /**
  * 회원가입 처리
  * @param params : 쿼리스트링값
@@ -107,4 +110,79 @@ export const processJoin = async (params, formData: FormData) => {
  * @param params
  * @param formData
  */
-export const processLogin = async (params, formData: FormData) => {}
+export const processLogin = async (params, formData: FormData) => {
+  const redirectUrl = params?.redirectUrl ?? '/'
+
+  let errors = {}
+  let hasErrors = false
+  // 필수 항목 검증 S
+  const email = formData.get('email')
+  const password = formData.get('password')
+  if (!email || !email.trim()) {
+    errors.email = errors.email ?? []
+    errors.email.push('이메일을 입력하세요.')
+    hasErrors = true
+  }
+
+  if (!password || !password?.trim()) {
+    errors.password = errors.password ?? []
+    errors.password.push('비밀번호를 입력하세요.')
+    hasErrors = true
+  }
+  // 필수 항목 검증 E
+
+  // 서버 요청 처리 S
+  if (!hasErrors) {
+    const apiUrl = process.env.API_URL + '/member/login'
+
+    try {
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const result = await res.json()
+      if (res.status === 200 && result.success) {
+        // 회원 인증 성공
+        // 회원 인증
+        const cookie = await cookies()
+        cookie.set('token', result.data, {
+          httpOnly: true,
+          sameSite: 'none',
+          secure: true,
+          path: '/',
+        })
+      } else {
+        errors = result.message
+        hasErrors = true
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  // 서버 요청 처리 E
+
+  if (hasErrors) {
+    return errors
+  }
+
+  // 로그인 성공 시 이동
+  redirect(redirectUrl)
+}
+
+/**
+ * 로그인한 회원 정보를 조회
+ *
+ */
+export const getUserInfo = async () => {
+  try {
+    const res = await apiRequest('/member/login')
+    if (res.status === 200) {
+      const result = await res.json()
+      return result.success && result.data
+    }
+  } catch (err) {}
+}

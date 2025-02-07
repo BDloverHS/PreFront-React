@@ -8,7 +8,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: '핀테크 과정 포트폴리오',
-  description: '설명****',
+  description: '설명...',
 }
 
 export default function RootLayout({

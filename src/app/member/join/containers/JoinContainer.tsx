@@ -6,8 +6,11 @@ import { processJoin } from '../../services/actions'
 
 const JoinContainer = () => {
   const searchParams = useSearchParams()
-  const actionState = useActionState(processJoin, searchParams)
-  const [form, setForm] = useState({})
+  const params = { redirectUrl: searchParams.get('redirectUrl') }
+  const actionState = useActionState(processJoin, params)
+  const [form, setForm] = useState({
+    gender: 'FEMALE' /* 기본값 설정 */,
+  })
 
   const onChange = useCallback((e) => {
     setForm((form) => ({ ...form, [e.target.name]: e.target.value }))

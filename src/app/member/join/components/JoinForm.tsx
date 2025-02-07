@@ -120,6 +120,7 @@ const JoinForm = ({ form, onClick, onChange, onSelectDate, actionState }) => {
           type="text"
           name="phoneNumber"
           placeholder="휴대폰번호"
+          color="dark"
           value={form?.phoneNumber ?? ''}
           onChange={onChange}
         />
